@@ -33,33 +33,13 @@ __NOTE__: `--security-opt seccomp=unconfined` flag is required to launch humble 
 docker run -p 6080:80 --security-opt seccomp=unconfined --shm-size=512m ghcr.io/tiryoh/ros2-desktop-vnc:humble
 ```
 
-Browse http://127.0.0.1:6080/.
+Browse [`http://127.0.0.1:6080/`](http://127.0.0.1:6080/).
 
 ![default desktop](https://github.com/user-attachments/assets/29ff479f-de54-4032-995d-d1be244ff4e7)
 
 ## Build
 
 To build Docker image from this Dockerfile, run the following command.
-
-* dashing (deprecated)
-```sh
-cd dashing && docker build -t tiryoh/ros2-desktop-vnc:dashing .
-```
-
-* eloquent (deprecated)
-```sh
-cd eloquent && docker build -t tiryoh/ros2-desktop-vnc:eloquent .
-```
-
-* foxy (deprecated)
-```sh
-cd foxy && docker build -t tiryoh/ros2-desktop-vnc:foxy .
-```
-
-* galactic (deprecated)
-```sh
-cd galactic && docker build -t tiryoh/ros2-desktop-vnc:galactic .
-```
 
 * humble
 ```sh
@@ -69,16 +49,6 @@ cd humble && docker build -t tiryoh/ros2-desktop-vnc:humble .
 cd humble && docker buildx build --platform=linux/amd64 --progress=plain -t tiryoh/ros2-desktop-vnc:humble-amd64 .
 # using "docker buildx" (arm64)
 cd humble && docker buildx build --platform=linux/arm64 --progress=plain -t tiryoh/ros2-desktop-vnc:humble-arm64 .
-```
-
-* iron
-```sh
-# using "docker build"
-cd iron && docker build -t tiryoh/ros2-desktop-vnc:iron .
-# using "docker buildx" (amd64)
-cd iron && docker buildx build --platform=linux/amd64 --progress=plain -t tiryoh/ros2-desktop-vnc:iron-amd64 .
-# using "docker buildx" (arm64)
-cd iron && docker buildx build --platform=linux/arm64 --progress=plain -t tiryoh/ros2-desktop-vnc:iron-arm64 .
 ```
 
 * jazzy
@@ -91,26 +61,31 @@ cd jazzy && docker buildx build --platform=linux/amd64 --progress=plain -t tiryo
 cd jazzy && docker buildx build --platform=linux/arm64 --progress=plain -t tiryoh/ros2-desktop-vnc:jazzy-arm64 .
 ```
 
-* rolling
-```sh
-# using "docker build"
-cd rolling && docker build -t tiryoh/ros2-desktop-vnc:rolling .
-# using "docker buildx" (amd64)
-cd rolling && docker buildx build --platform=linux/amd64 --progress=plain -t tiryoh/ros2-desktop-vnc:rolling-amd64 .
-# using "docker buildx" (arm64)
-cd rolling && docker buildx build --platform=linux/arm64 --progress=plain -t tiryoh/ros2-desktop-vnc:rolling-arm64 .
+* [`humble`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=humble), [`latest`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=latest) which is based on [`humble/Dockerfile`](./humble/Dockerfile)
+
+* [`jazzy`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=jazzy) which is based on [`jazzy/Dockerfile`](./jazzy/Dockerfile)
+
+## Run container by script
+*E.g.*, `humble`
+
+```bash
+cd humble
+chmod +x ros_humble.bash
+
+# default mount: $HOME/src  ->  /home/$USER/src
+./ros_humble.bash
+# or specify your local src directory explicitly
+./ros_humble.bash /absolute/path/to/src
+
+# use the GHCR image instead of a local/DockerHub tag
+IMAGE=ghcr.io/tiryoh/ros2-desktop-vnc:humble ./ros_humble.bash
 ```
 
-## Docker tags on hub.docker.com
+Browse [`http://127.0.0.1:6080/`](http://127.0.0.1:6080/).
 
-* ~~[`dashing`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=dashing) which is based on [`dashing/Dockerfile`](./dashing/Dockerfile)~~ deprecated
-* ~~[`eloquent`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=eloquent) which is based on [`eloquent/Dockerfile`](./eloquent/Dockerfile)~~ deprecated
-* [`foxy`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=foxy) which is based on [`foxy/Dockerfile`](./foxy/Dockerfile)
-* ~~[`galactic`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=galactic) which is based on [`galactic/Dockerfile`](./galactic/Dockerfile)~~ deprecated
-* [`humble`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=humble), [`latest`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=latest) which is based on [`humble/Dockerfile`](./humble/Dockerfile)
-* [`iron`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=iron) which is based on [`iron/Dockerfile`](./iron/Dockerfile)
-* [`jazzy`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=jazzy) which is based on [`jazzy/Dockerfile`](./jazzy/Dockerfile)
-* [`rolling`](https://hub.docker.com/r/tiryoh/ros2-desktop-vnc/tags?page=1&name=rolling) which is based on [`rolling/Dockerfile`](./rolling/Dockerfile)
+```bash
+docker exec -it ros_humble bash
+```
 
 Docker tags and build logs are listed on this page.  
 https://github.com/Tiryoh/docker-ros2-desktop-vnc/wiki

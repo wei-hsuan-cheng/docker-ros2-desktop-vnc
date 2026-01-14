@@ -121,6 +121,8 @@ COPY ./entrypoint.sh /
 RUN dos2unix /entrypoint.sh
 ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ]
 
-ENV USER ubuntu
-ENV PASSWD ubuntu
+ENV USER whcheng
+ENV PASSWD robot
+
+WORKDIR /home/${USER}
 
