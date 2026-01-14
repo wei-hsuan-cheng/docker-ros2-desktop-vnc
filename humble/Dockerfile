@@ -124,5 +124,9 @@ ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ]
 ENV USER whcheng
 ENV PASSWD robot
 
+# ros2 helpers
+RUN echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
+RUN echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc
+
 WORKDIR /home/${USER}
 
