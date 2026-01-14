@@ -19,7 +19,10 @@ To build Docker image from this Dockerfile, run the following command.
 
 Based on [`humble/Dockerfile`](./humble/Dockerfile):
 ```bash
-cd humble && docker build -t tiryoh/ros2-desktop-vnc:humble .
+# using "docker buildx" (amd64)
+cd humble && docker buildx build --platform=linux/amd64 --progress=plain -t tiryoh/ros2-desktop-vnc:humble-amd64 .
+# using "docker buildx" (arm64)
+cd humble && docker buildx build --platform=linux/arm64 --progress=plain -t tiryoh/ros2-desktop-vnc:humble-arm64 .
 ```
 
 ## Quick Start
