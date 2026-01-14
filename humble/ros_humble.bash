@@ -43,4 +43,5 @@ docker run -d \
   "$IMAGE"
 
 echo "VNC:   http://127.0.0.1:${HOST_PORT}/"
-echo "Shell: docker exec -it -u ${USER_NAME} ${NAME} bash"
+# echo "Shell: docker exec -it -u ${USER_NAME} ${NAME} bash"
+echo "Shell: docker exec -it ${NAME} bash"

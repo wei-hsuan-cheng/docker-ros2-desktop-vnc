@@ -39,6 +39,7 @@ Browse [`http://127.0.0.1:6080/`](http://127.0.0.1:6080/).
 ```bash
 cd humble
 chmod +x ros_humble.bash
+export IMAGE=tiryoh/ros2-desktop-vnc:humble-arm64
 ./ros_humble.bash
 ```
 
